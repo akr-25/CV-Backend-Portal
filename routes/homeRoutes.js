@@ -1,4 +1,4 @@
-const {requireAuth } = require("../middleware/authMiddleware")
+const { requireAuth } = require("../middleware/authMiddleware")
 const { Point, Admin, User, Flag, sequelize } = require("../models");
 const fs = require("fs");
 const AdminService = require("../controllers/helpers/adminHelper");
@@ -40,6 +40,8 @@ router.get("/api", async (req, res) => {
       include: [{
         model: Point,
         include: [{ model: User, as: "User" }]
+      }, {
+        model: User
       }],
     })
 
@@ -56,7 +58,9 @@ router.get("/api", async (req, res) => {
       },
       include: [{
         model: Point,
-        include: [{model: User, as: "User"}]
+        include: [{ model: User, as: "User" }]
+      }, {
+        model: User
       }],
     })
 
